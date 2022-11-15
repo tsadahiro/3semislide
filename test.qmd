@@ -1,0 +1,225 @@
+---
+title: "1.What is it, and What for?"
+format: revealjs
+editor: visual
+date: 2022.11.16
+author: 担当：貞廣泰造
+---
+
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+## 1. 線型計画法とは
+
+# 1.1 ある例
+
+$$ 最大化： x_1 + x_2 $$
+
+\begin{eqnarray*}
+制約：
+&& x_1 \geq 0 \\
+&& x_2\geq 0 \\
+&& x_2 - x_1 \leq 1 \\
+&& x_1 + 6x_2 \leq 15\\
+&& 4x_1 - x_2 \leq 10
+\end{eqnarray*}
+
+## 1.1 
+
+<script type="text/tikz">
+\begin{tikzpicture}[scale=3]
+\draw[fill = teal!50!white] (0,0) -- (2.5,0) -- (3,2) -- ({9/7}, {16/7}) -- (0,1) -- cycle;
+\draw[->,>=latex, line width = 2] (-1,0) -- (5,0) node[below]{\huge $x_1$};
+\draw[->,>=latex, line width = 2] (0,-1) -- (0,4) node[left]{\huge $x_2$};
+\draw (-2,-1) -- (3,4);
+\draw (0,2.5) -- ++({6*0.7},{-1*0.7});
+\draw (0,2.5) -- ++({-6*(0.1)},{1*(0.1)});
+\draw (2.5,0) -- ++(1,4);
+\draw[->,>=latex,line width=5] (0,0) -- ++(1,1) node[above] {\huge$(1,1)$};
+\draw[fill=red] (3,2) circle (0.1);
+\end{tikzpicture}
+</script>
+
+## 1.1 
+
+<script type="text/tikz">
+\begin{tikzpicture}[scale=3]
+\draw[fill = teal!50!white] (0,0) -- (2.5,0) -- (3,2) -- ({9/7}, {16/7}) -- (0,1) -- cycle;
+\draw[->,>=latex, line width = 2] (-1,0) -- (5,0) node[below]{\huge $x_1$};
+\draw[->,>=latex, line width = 2] (0,-1) -- (0,4) node[left]{\huge $x_2$};
+\draw (-2,-1) -- (3,4);
+\draw (0,2.5) -- ++({6*0.7},{-1*0.7});
+\draw (0,2.5) -- ++({-6*(0.1)},{1*(0.1)});
+\draw (2.5,0) -- ++(1,4);
+\draw[line width = 2] (1,4) -- (5,0);
+\draw (0,4) -- (5,-1);
+\draw (0,3) -- (4,-1);
+\draw[->,>=latex,line width=5] (0,0) -- ++(1,1) node[above] {\huge$(1,1)$};
+\draw[fill=red] (3,2) circle (0.1);
+\end{tikzpicture}
+</script>
+
+## 
+
+一般の線形計画問題においては、与えられた線形不等式や
+線形等式の系を満たす
+ベクトル${\bf x} = (x_1, x_2, \ldots, x_n)$のなかで、
+**目的関数**
+$$
+{\bf c}^T{\bf x} = c_1x_1 + c_2x_2 + \cdots + c_nx_n
+$$
+を最大化または最小化するものを見つけることが目的。
+
+${\bf x}$が満たすべき等式や不等式を**制約条件**
+と呼ぶ。
+
+##
+
+連立方程式が行列を使って
+$$
+A{\bf x} = {\bf b}
+$$
+と簡単に表されたように行列を使って
+表したい。
+
+そのため、例えば等式
+$$
+x_1 + 3x_2 = 7
+$$
+を不等式の組、
+
+\begin{eqnarray*}
+x_1 + 3x_2 & \leq & 7\\
+-x_1 - 3x_2 & \leq & -7\\
+\end{eqnarray*}
+
+のように表す。
+
+## 
+
+最小化問題は目的関数${\bf c}^T{\bf x}$を
+$-{\bf c}^T{\bf x}$と変換することにより、
+最大化問題に変形できる。
+
+よって、線形計画問題はベクトル${\bf c}$と
+行列$A$を適切に選ぶことにより、
+\begin{eqnarray*}
+最大化 & & {\bf c}^T{\bf x}\\
+制約 &&A{\bf x}  \leq {\bf x}
+\end{eqnarray*}
+と表現できる。
+
+##
+
+$$
+\begin{eqnarray*}
+最大化: && x_1 + x_2\\
+制約：
+&& x_1 \geq 0 \\
+&& x_2\geq 0 \\
+&& x_2 - x_1 \leq 1 \\
+&& x_1 + 6x_2 \leq 15\\
+&& 4x_1 - x_2 \leq 10
+\end{eqnarray*}
+~~~\Longrightarrow~~~
+{\bf c}^T = (1,1), ~~
+A = 
+\begin{pmatrix}
+1 & 0\\
+0 & -1 \\
+-1 & 1 \\
+1 & 6 \\
+4 & -1\\
+\end{pmatrix}
+$$
+
+##
+
+線形計画問題においてすべての制約を満たす
+${\bf x}$を**実行可能解**と呼ぶ。
+
+つまり、実行可能解の集合は
+
+$$
+\{{\bf x}\in {\mathbb R}^n\,|\, A{\bf x}\leq {\bf c}\}
+$$
+
+**実行可能解**のなかで目的関数を最大化する
+ものを**最適解**と呼ぶ。
+
+##
+一般に線形計画は最適解を
+
+* ただ一つだけ持つ
+* 無限にたくさん持つ
+* ひとつも持たない
+
+のいずれかである。
+
+##
+例えば上の例で制約を変えず、目的関数の${\bf c}$を
+${\bf c}^T = (\frac{1}{6}, 1)$と変更すると
+
+<script type="text/tikz">
+\begin{tikzpicture}[scale=3]
+\draw[fill = teal!50!white] (0,0) -- (2.5,0) -- (3,2) -- ({9/7}, {16/7}) -- (0,1) -- cycle;
+\draw[->,>=latex, line width = 2] (-1,0) -- (5,0) node[below]{\huge $x_1$};
+\draw[->,>=latex, line width = 2] (0,-1) -- (0,4) node[left]{\huge $x_2$};
+\draw (-2,-1) -- (3,4);
+\draw (0,2.5) -- ++({6*0.7},{-1*0.7});
+\draw (0,2.5) -- ++({-6*(0.1)},{1*(0.1)});
+\draw (2.5,0) -- ++(1,4);
+\draw[->,>=latex,line width=5] (0,0) -- ++({1/6},1) node[above] {\huge$(1/6,1)$};
+\draw[color=red,line width=3] (3,2) -- ({9/7}, {16/7});
+\end{tikzpicture}
+</script>
+
+##
+
+$$
+\begin{eqnarray*}
+最大化: && x_1 + x_2\\
+制約：
+&& x_1 \geq 0 \\
+&& x_2\geq 0 \\
+&& x_2 - x_1 {\color{red}\geq} 1 \\
+&& x_1 + 6x_2 \leq 15\\
+&& 4x_1 - x_2 {\color{red}\geq}10
+\end{eqnarray*}
+$$
+
+とすると
+
+##
+
+実行可能解が空
+
+<script type="text/tikz">
+\begin{tikzpicture}[scale=3]
+\draw[->,>=latex, line width = 2] (-1,0) -- (5,0) node[below]{\huge $x_1$};
+\draw[->,>=latex, line width = 2] (0,-1) -- (0,4) node[left]{\huge $x_2$};
+\draw (-2,-1) -- (3,4);
+\draw (0,2.5) -- ++({6*0.7},{-1*0.7});
+\draw (0,2.5) -- ++({-6*(0.1)},{1*(0.1)});
+\draw (2.5,0) -- ++(1,4);
+\end{tikzpicture}
+</script>
+
+## まとめ
+
+上の例では変数は２つだけで図を描くことで
+問題が解けた。
+しかし、一般には数千個の変数を持つ線形計画問題を
+解くことは珍しくない。
+
+次の点が重要：
+
+* 線形計画問題は理論的にも実用的にも高速に解を
+ 求めることが出来る。
+
+* ただし、高速なアルゴリズムは単純なものではないが、
+そのようなアルゴリズムを実装した様々なソフトウエアが
+存在する。
+
+* よって問題を線型計画法として定式化することが出来れば
+高速な求解が可能

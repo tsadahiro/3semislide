@@ -1,0 +1,53 @@
+---
+title: "3pro"
+format: revealjs
+editor: visual
+---
+
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+## 線型計画法とは
+
+# 例
+
+$$ 最大化： x_1 + x_2 $$
+
+\begin{eqnarray*}
+次の条件を満たしながら 
+&& x_1 \geq 0 \\
+&& x_2\geq 0 \\
+&& x_2 - x_1 \leq 1 \\
+&&
+\end{eqnarray*}
+
+## 
+
+<script type="text/tikz">
+\begin{tikzpicture}
+\draw (0,0) circle (1in);
+\coordinate [label=below right:$\mathcal{C}$](C) at (-1,2);
+
+\coordinate (A) at (0,1) node [left=3] at (A) {$A$};
+\coordinate (B) at (0,-1) node [left=10] at (B) {$B$};
+\fill (A) circle [radius=2pt];
+\fill (B) circle [radius=2pt];
+\draw [->, thick] (A) to (B);
+\draw (8,0) circle (1in);
+\coordinate [label=below right:$\mathcal{D}$](D) at (7,2);
+
+
+\draw [->, thick] (2,2) to [out=30,in=150] (6,2);
+\coordinate [label=above left:$F$]() at (4,3);
+\draw [->, thick] (6,-2) to [out=210,in=330] (2,-2);
+\coordinate [label=below left:$G$]() at (4,-3);
+\end{tikzpicture}
+</script>
+
+## Code
+
+When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r, echo=TRUE}
+1 + 1
+```
